@@ -50,11 +50,11 @@ import { connectActionSheet } from '@expo/react-native-action-sheet';
     if (language == 'eng') {
       await this.onBibleVerseChange('niv2011');
     } else if (language == 'cht') {
-      await this.onBibleVerseChange('rcuvts');
+      await this.onBibleVerseChange('cunpts');
     } else if (language == 'spa') {
       await this.onBibleVerseChange('nvi');
     } else {
-      await this.onBibleVerseChange('rcuvss');
+      await this.onBibleVerseChange('cunpss');
     }
     getCurrentUser().logUserInfo();
   }

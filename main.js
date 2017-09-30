@@ -35,7 +35,7 @@ class AppContainer extends React.Component {
         let locale = await Expo.Util.getCurrentLocaleAsync();
         console.log(locale);
         let lang = 'chs';
-        let bible = 'rcuvss';
+        let bible = 'cunpss';
         if (locale.substring(0, 2) == 'es') {
           lang = 'spa';
           bible = 'niv2011';
@@ -44,7 +44,7 @@ class AppContainer extends React.Component {
           bible = 'niv2011';
         } else if (locale == 'zh-hk' || locale == 'zh-tw') {
           lang = 'cht';
-          bible = 'rcuvts';
+          bible = 'cunpts';
         }
 
         await getCurrentUser().loginAsync("4250000000", lang);
