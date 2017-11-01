@@ -16,7 +16,7 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 let store;
 
-export default App extends React.Component {
+export default class App extends React.Component {
   state = {
     appIsReady: false,
     userIsLoggedOn: false,
