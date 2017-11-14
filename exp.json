@@ -1,10 +1,10 @@
 {
   "name": "CBSF",
   "description": "Chinese Bible Study Fellowship",
-  "slug": "CBSFApp",
+  "slug": "CBSFAppiOS",
   "privacy": "public",
-  "sdkVersion": "15.0.0",
-  "version": "2017.10.07",
+  "sdkVersion": "16.0.0",
+  "version": "2017.11.14",
   "primaryColor": "#cccccc",
   "icon": "./assets/icons/app-icon.png",
   "notification": {
