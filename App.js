@@ -13,6 +13,7 @@ import { Models } from './dataStorage/models';
 import LoginUI from './components/LoginUI';
 import { getCurrentUser } from './store/user';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import { LegacyAsyncStorage } from 'expo';
 
 let store;
 
@@ -35,7 +36,7 @@ export default class App extends React.Component {
         let locale = await Expo.Util.getCurrentLocaleAsync();
         console.log(locale);
         let lang = 'chs';
-        let bible = 'cunpss';
+        let bible = 'rcuvss';
         if (locale.substring(0, 2) == 'es') {
           lang = 'spa';
           bible = 'niv2011';
@@ -44,7 +45,7 @@ export default class App extends React.Component {
           bible = 'niv2011';
         } else if (locale == 'zh-hk' || locale == 'zh-tw') {
           lang = 'cht';
-          bible = 'cunpts';
+          bible = 'rcuvts';
         }
 
         await getCurrentUser().loginAsync("4250000000", lang);

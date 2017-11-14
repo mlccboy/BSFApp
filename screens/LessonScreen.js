@@ -275,6 +275,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: Layout.window.width - 30
+    maxWidth: Layout.window.width - 30
   }
 });
