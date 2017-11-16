@@ -9,7 +9,7 @@ import { clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync }
 import { getCurrentUser } from '../store/user';
 import { requestBooks } from "../store/books.js";
 import { FontAwesome } from '@expo/vector-icons';
-import SettingsList from 'react-native-settings-list';
+//import SettingsList from 'react-native-settings-list';
 import { getI18nText, getI18nBibleBook } from '../store/I18n';
 import { clearLesson } from '../store/lessons.js'
 import { clearPassage } from '../store/passage.js'

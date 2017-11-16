@@ -11,13 +11,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/ex-navigation": "~2.9.2",
+    "@expo/ex-navigation": "~2.10.0",
     "@expo/react-native-action-sheet": "^1.0.0",
-    "expo": "^15.0.2",
+    "expo": "^16.0.0",
     "lodash": "^4.17.4",
     "radio-button-react-native": "^1.1.6",
-    "react": "~15.4.0",
-    "react-native": "https://github.com/exponent/react-native/archive/sdk-15.0.0.tar.gz",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-16.0.0.tar.gz",
     "react-native-autogrow-textinput": "^4.1.0",
     "react-native-collapsible": "^0.8.0",
     "react-native-keyboard-aware-scroll-view": "^0.2.8",

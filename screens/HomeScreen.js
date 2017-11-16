@@ -9,13 +9,16 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform,
+  AsyncStorage,
+  Share
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { MonoText } from '../components/StyledText';
 import Colors from '../constants/Colors'
 import { requestBooks } from "../store/books.js";
 import { getI18nText, getI18nBibleBook } from '../store/I18n';
+import { RkButton } from 'react-native-ui-kitten';
+import { LegacyAsyncStorage } from 'expo';
 
 class HomeScreen extends React.Component {
   static route = {
@@ -38,6 +41,17 @@ class HomeScreen extends React.Component {
     this.props.navigation.getNavigator('root').push('lesson', { lesson });
   }
 
+  async exportAnswers() {
+    const old = await LegacyAsyncStorage.getItem('ANSWER');
+    console.log('[OLD]' + JSON.stringify(old));
+
+    await LegacyAsyncStorage.migrateItems(['ANSWER']);
+
+    const answer = await AsyncStorage.getItem('ANSWER');
+    console.log('[NEW]' + JSON.stringify(answer));
+    //Share.share(shareData);
+  }
+
   render() {
     mainUI = null
     if (this.props.booklist != undefined) {
@@ -53,13 +67,13 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        {
-          Platform.OS == 'ios' &&
-          <Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', margin: 5 }}>11/13 Notice: After the recent app update, you'll not see your notes, please do not uninstall the app (your data is not lost), we're working on a fix to bring your notes back</Text>
-        }
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
+          <View>
+            < Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', margin: 5 }}>Notice: Please export all your answers, after the recent app update, you'll not see your notes</Text>
+            <RkButton onPress={this.exportAnswers.bind(this)}>Export</RkButton>
+          </View>
           <View style={styles.booksContainer}>
             {mainUI}
           </View>
