@@ -32,49 +32,17 @@ class BibleScreen extends React.Component {
     }
   }
 
-  getVerseText(verseText) {
-    // Check to see if the first line is part of the bible
-    const firstLinePos = verseText.indexOf('\n');
-    if (firstLinePos != -1) {
-      const firstLine = verseText.substring(0, firstLinePos);
-      var annotation = true;
-      if (verseText.length > firstLinePos) {
-        // We have more than one lines
-        var words = firstLine.split(' ');
-        // It has to be more than one words
-        if (words.length > 1) {
-          // Check each word starts with upper case
-          for (var w in words) {
-            if (words[w][0] != words[w][0].toUpperCase()) {
-              // Not upper case, not an annotation
-              annotation = false;
-              break;
-            }
-          }
-
-          // Use "()" for annotation if found
-          if (annotation) {
-            verseText = '(' + firstLine + ') ' + verseText.substring(firstLinePos + 1);
-          }
-        }
-      }
-    }
-
-    return verseText;
-  }
-
   render() {
     if (this.props.passage) {
-      // TODO: [turbozv] We should list all applicable languages here, so that user don't need to go back to settings
       const paragraphs = this.props.passage.paragraphs;
-      let html = '<style> body { font-size: 110%;} </style>';
+      let html = '<head><meta name="viewport" content="width=device-width, initial-scale=1" /></head><style> body { font-size: 19;} </style> <body>';
       for (var i in paragraphs) {
         for (var j in paragraphs[i].verses) {
           const verse = paragraphs[i].verses[j];
-          const verseText = this.getVerseText(verse.text);
-          html += verse.verse + " " + verseText + "<br>";
+          html += verse.verse + " " + verse.text + "<br>";
         }
       }
+      html += '</body>';
       return (
         <WebView
           source={{ html }}
