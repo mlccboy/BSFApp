@@ -220,7 +220,7 @@ import { LegacyAsyncStorage } from 'expo';
         AsyncStorage.setItem(key, oldData, () => {
           AsyncStorage.mergeItem(key, newData, () => {
             AsyncStorage.getItem(key, (err, mergedData) => {
-              Alert.alert("Result", `[Old]${oldData}\n\n[New]${newData}\n\n[Merged]${mergedData}`);
+              Alert.alert("Result", `[Old]${oldData}\n\n\n[Merged]${mergedData}`);
             });
           });
         });
