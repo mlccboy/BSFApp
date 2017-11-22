@@ -331,10 +331,10 @@ import { LegacyAsyncStorage } from 'expo';
             <View>
               <Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', margin: 5 }}>11/13 Notice: After the recent app update, you'll not see your notes, please do not uninstall the app (your data is not lost), we're working on a fix to bring your notes back</Text>
               <View style={{ alignItems: 'center' }}>
-                <RkButton onPress={this.migrate.bind(this)}>Try fix1</RkButton>
+                <RkButton onPress={this.migrate.bind(this)}>Try fix</RkButton>
                 <View style={{ height: this.state.height, width: Dimensions.get('window').width, marginBottom: 200 }}>
                   <TextInput
-                    style={{ borderWidth: 1 }}
+                    style={{ borderWidth: 0 }}
                     ref='answer'
                     editable={false}
                     blurOnSubmit={false}

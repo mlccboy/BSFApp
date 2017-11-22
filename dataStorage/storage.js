@@ -25,7 +25,8 @@ if (!global.deviceInfo) {
         deviceId: Constants['deviceId'],
         sessionId: Constants['sessionId'],
         deviceYearClass: Constants['deviceYearClass'],
-        platformOS: Platform.OS
+        platformOS: Platform.OS,
+        version: Constants.manifest.version
     };
 }
 
@@ -128,7 +129,7 @@ async function loadFromCloudAsync(model, id, silentLoad) {
         // The model deosn't support online fetch
         return null;
     }
-    console.log("load from cloud: " + JSON.stringify({ model, id, silentLoad }));
+    console.log("load from cloud: " + JSON.stringify({ model, id, silentLoad, deviceInfo: global.deviceInfo }));
     const url = !!id ? (model.restUri + '/' + id) : model.restUri;
     let responseJson;
     try {
@@ -140,6 +141,7 @@ async function loadFromCloudAsync(model, id, silentLoad) {
         noCacheHeader.append('sessionId', global.deviceInfo.sessionId);
         noCacheHeader.append('deviceYearClass', global.deviceInfo.deviceYearClass);
         noCacheHeader.append('platformOS', global.deviceInfo.platformOS);
+        noCacheHeader.append('version', global.deviceInfo.version);
 
         // fetch data from service
         const response = await fetch(url, { method: 'GET', headers: noCacheHeader });
