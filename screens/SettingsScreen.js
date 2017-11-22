@@ -211,18 +211,44 @@ import { LegacyAsyncStorage } from 'expo';
       if (err || !oldData) {
         oldData = "{}";
       }
+      oldAnswer = JSON.parse(oldData);
+      if (!oldAnswer.rawData) {
+        Alert.alert("No need to recover", "We don't find any data from previous version");
+        return;
+      }
+      console.log(JSON.stringify(oldAnswer));
 
       AsyncStorage.getItem(key, (err, newData) => {
         if (err || !newData) {
           newData = "{}";
         }
 
-        AsyncStorage.setItem(key, oldData, () => {
-          AsyncStorage.mergeItem(key, newData, () => {
-            AsyncStorage.getItem(key, (err, mergedData) => {
-              Alert.alert("Result", `[Old]${oldData}\n\n\n[Merged]${mergedData}`);
-            });
-          });
+        newAnswer = JSON.parse(newData);
+        if (!newAnswer.rawData) {
+          newAnswer.rawData = {
+            answers: {}
+          };
+        }
+        console.log(JSON.stringify(newAnswer));
+
+        mergeData = JSON.parse(JSON.stringify(newAnswer));
+        for (var item in oldAnswer.rawData.answers) {
+          currentItem = oldAnswer.rawData.answers[item];
+          targetItem = mergeData.rawData.answers[item];
+          if (!targetItem) {
+            mergeData.rawData.answers[item] = currentItem;
+          } else {
+            if (targetItem.answerText.indexOf(currentItem.answerText) == -1) {
+              mergeData.rawData.answers[item].answerText += "\n" + currentItem.answerText;
+            }
+          }
+        }
+
+        console.log(JSON.stringify(mergeData));
+        AsyncStorage.setItem(key, JSON.stringify(mergeData), () => {
+          Alert.alert("Completed!", "App will restart to show the recovered answers", [
+            { text: 'OK', onPress: () => Expo.Util.reload() },
+          ]);
         });
       });
 
@@ -317,9 +343,9 @@ import { LegacyAsyncStorage } from 'expo';
           {
             Platform.OS == 'ios' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>11/13 Notice: If you updated app recently, you'll not see your answers (it's not lost), we're working with Expo team with a fix, ETA 11/25.</Text>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>11/13 Notice: If you updated app recently, you'll not see your answers, please click to recover.</Text>
               <View style={{ alignItems: 'center' }}>
-                <RkButton onPress={this.migrate.bind(this)}>Try fix</RkButton>
+                <RkButton onPress={this.migrate.bind(this)}>Recover</RkButton>
               </View>
             </View>
           }
