@@ -30,7 +30,6 @@ import { LegacyAsyncStorage } from 'expo';
     language: getCurrentUser().getLanguageDisplayName(),
     bibleVersion: getCurrentUser().getBibleVersionDisplayName(),
     offlineMode: getCurrentUser().getIsOfflineMode(),
-    log: '',
     height: 120
   };
 
@@ -205,33 +204,23 @@ import { LegacyAsyncStorage } from 'expo';
   }
 
   async migrate() {
-    console.log('migrate');
-
-    this.setState({ log: 'Start' });
+    const key = 'ANSWER';
     await LegacyAsyncStorage.migrateItems([key]);
-
-    var key = 'ANSWER';
 
     LegacyAsyncStorage.getItem(key, (err, oldData) => {
       if (err || !oldData) {
         oldData = "{}";
       }
-      console.log("[OLD]" + key + ":" + oldData);
-      this.setState({ log: this.state.log + "\n[OLD]" + key + ":" + oldData });
 
       AsyncStorage.getItem(key, (err, newData) => {
         if (err || !newData) {
           newData = "{}";
         }
-        console.log("[NEW]" + key + ":" + newData);
-        this.setState({ log: this.state.log + "\n[NEW]" + key + ":" + newData });
 
         AsyncStorage.setItem(key, oldData, () => {
           AsyncStorage.mergeItem(key, newData, () => {
             AsyncStorage.getItem(key, (err, mergedData) => {
-              console.log("[MERGED]" + key + ":" + mergedData);
-              this.setState({ log: this.state.log + "\n[MERGED]" + key + ":" + mergedData });
-              this.setState({ log: this.state.log + "\nFinished!" });
+              Alert.alert("Result", `[Old]${oldData}\n\n[New]${newData}\n\n[Merged]${mergedData}`);
             });
           });
         });
@@ -244,7 +233,6 @@ import { LegacyAsyncStorage } from 'expo';
 
   onContentSizeChange(e) {
     const contentSize = e.nativeEvent.contentSize;
-    console.log(JSON.stringify(contentSize));
 
     // Support earlier versions of React Native on Android.
     if (!contentSize) return;
@@ -329,21 +317,9 @@ import { LegacyAsyncStorage } from 'expo';
           {
             Platform.OS == 'ios' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', margin: 5 }}>11/13 Notice: After the recent app update, you'll not see your notes, please do not uninstall the app (your data is not lost), we're working on a fix to bring your notes back</Text>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>11/13 Notice: If you updated app recently, you'll not see your answers (it's not lost), we're working with Expo team with a fix, ETA 11/25.</Text>
               <View style={{ alignItems: 'center' }}>
                 <RkButton onPress={this.migrate.bind(this)}>Try fix</RkButton>
-                <View style={{ height: this.state.height, width: Dimensions.get('window').width, marginBottom: 200 }}>
-                  <TextInput
-                    style={{ borderWidth: 0 }}
-                    ref='answer'
-                    editable={false}
-                    blurOnSubmit={false}
-                    multiline
-                    value={this.state.log}
-                    onChange={(e) => this.onContentSizeChange(e)}
-                    onContentSizeChange={(e) => this.onContentSizeChange(e)}
-                  />
-                </View>
               </View>
             </View>
           }

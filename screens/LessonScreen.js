@@ -273,8 +273,8 @@ const styles = StyleSheet.create({
     color: Colors.yellow
   },
   row: {
-    //flexDirection: 'row',
-    //flexWrap: 'wrap',
-    //maxWidth: Layout.window.width - 30
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    maxWidth: Layout.window.width - 30
   }
 });
