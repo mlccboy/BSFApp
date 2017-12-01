@@ -115,11 +115,6 @@ import { LegacyAsyncStorage } from 'expo';
   }
 
   onBibleVerse() {
-    if (getCurrentUser().getIsOfflineMode()) {
-      Alert.alert(getI18nText("提示"), getI18nText("请先关闭离线模式"));
-      return;
-    }
-
     let options = [];
     for (var i in Models.BibleVersions) {
       const text = Models.BibleVersions[i].DisplayName;
@@ -305,6 +300,7 @@ import { LegacyAsyncStorage } from 'expo';
               titleInfoStyle={styles.titleInfoStyle}
               onPress={this.onBibleVerse.bind(this)}
             />
+            {/*
             <SettingsList.Item
               title={getI18nText('离线模式')}
               hasNavArrow={false}
@@ -312,7 +308,7 @@ import { LegacyAsyncStorage } from 'expo';
               switchState={this.state.offlineMode}
               switchOnValueChange={this.onSwitchOffline.bind(this)}
             />
-            {/*<SettingsList.Item
+            <SettingsList.Item
             title='字体大小'
             titleInfo='中等'
             titleInfoStyle={styles.titleInfoStyle}
