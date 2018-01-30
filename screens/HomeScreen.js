@@ -56,6 +56,7 @@ class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
+          <Text style={{ color: 'red' }}>Please update your CBSF app in AppStore to get more lessons</Text>
           <View style={styles.booksContainer}>
             {mainUI}
           </View>

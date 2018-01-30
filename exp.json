@@ -4,7 +4,7 @@
   "slug": "CBSFApp",
   "privacy": "public",
   "sdkVersion": "16.0.0",
-  "version": "2017.11.30.0",
+  "version": "2018.01.29.0",
   "primaryColor": "#cccccc",
   "icon": "./assets/icons/app-icon.png",
   "notification": {
