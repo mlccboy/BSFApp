@@ -26,8 +26,7 @@ if (!global.deviceInfo) {
         sessionId: Constants['sessionId'],
         deviceYearClass: Constants['deviceYearClass'],
         platformOS: Platform.OS,
-        version: Constants.manifest.version,
-        sdkVersion: 'SDK' + Constants.manifest.sdkVersion
+        version: Constants.manifest.version
     };
 }
 
@@ -61,11 +60,9 @@ function getFromCache(key, keyString) {
             case 'spa':
                 cache = require("./spa.json");
                 break;
-            default:
-                cache = require("./eng.json");
-                break;
         }
         if (cache[keyString]) {
+            console.log("[Book/Lesson] Hit from cache");
             return cache[keyString];
         }
     }
@@ -103,11 +100,9 @@ function getFromCache(key, keyString) {
             case 'rvr1995':
                 cache = require("./rvr1995.json");
                 break;
-            default:
-                cache = require("./niv2011.json");
-                break;
         }
         if (cache[keyString]) {
+            console.log("[Passage] Hit from cache");
             return cache[keyString];
         }
     }
