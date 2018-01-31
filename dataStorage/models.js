@@ -22,7 +22,8 @@ export const Models = {
   Passage: {
     key: "PASSAGE",
     restUri: HostServer + "/verse",
-    cachePolicy: CachePolicy.AsyncStorage
+    cachePolicy: CachePolicy.AsyncStorage,
+    useLanguage: true
   },
   Logon: {
     key: "LOGON",
@@ -33,10 +34,6 @@ export const Models = {
   Feedback: {
     key: "Feedback",
     restUri: HostServer + "/feedback"
-  },
-  Poke: {
-    key: "Poke",
-    restUri: HostServer + "/poke"
   },
   Answer: {
     key: "ANSWER",
@@ -57,11 +54,17 @@ export const Models = {
     { DisplayName: "当代译本(简体)", Value: "ccb" },
     { DisplayName: "和合本修訂版(繁體)", Value: "rcuvts" },
     { DisplayName: "新譯本(繁體)", Value: "cnvt" },
-    { DisplayName: "New International Version 2011", Value: "niv2011" },
     { DisplayName: "New International Version 1984", Value: "niv1984" },
+    { DisplayName: "New International Version 2011", Value: "niv2011" },
     { DisplayName: "English Standard Version", Value: "esv" },
     { DisplayName: "King James Version", Value: "kjv" },
     { DisplayName: "Nueva Versión Internacional", Value: "nvi" },
     { DisplayName: "Reina-Valera 1995", Value: "rvr1995" },
+  ],
+  OfflineModes: [
+    { DisplayName: "简体中文 + 和合本修订版(简体)", Value: "chs" },
+    { DisplayName: "繁體中文 + 和合本修訂版(繁體)", Value: "cht" },
+    { DisplayName: "English + New International Version 2011", Value: "eng" },
+    { DisplayName: "Español + Nueva Versión Internacional", Value: "spa" },
   ]
 }
