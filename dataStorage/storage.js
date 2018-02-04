@@ -26,7 +26,8 @@ if (!global.deviceInfo) {
         sessionId: Constants['sessionId'],
         deviceYearClass: Constants['deviceYearClass'],
         platformOS: Platform.OS,
-        version: Constants.manifest.version
+        version: Constants.manifest.version,
+        sdkVersion: 'SDK' + Constants.manifest.sdkVersion
     };
 }
 
@@ -141,7 +142,7 @@ async function loadFromCloudAsync(model, id, silentLoad) {
         noCacheHeader.append('sessionId', global.deviceInfo.sessionId);
         noCacheHeader.append('deviceYearClass', global.deviceInfo.deviceYearClass);
         noCacheHeader.append('platformOS', global.deviceInfo.platformOS);
-        noCacheHeader.append('version', global.deviceInfo.version);
+        noCacheHeader.append('version', global.deviceInfo.version + ' ' + global.deviceInfo.sdkVersion);
 
         // fetch data from service
         const response = await fetch(url, { method: 'GET', headers: noCacheHeader });
@@ -222,6 +223,7 @@ async function callWebServiceAsync(url, api, method, headers, body) {
         httpHeaders.append('sessionId', global.deviceInfo.sessionId);
         httpHeaders.append('deviceYearClass', global.deviceInfo.deviceYearClass);
         httpHeaders.append('platformOS', global.deviceInfo.platformOS);
+        httpHeaders.append('version', global.deviceInfo.version + ' ' + global.deviceInfo.sdkVersion);
         if (headers) {
             headers.forEach(function (item) {
                 httpHeaders.append(item.name, item.value);

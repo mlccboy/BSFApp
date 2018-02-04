@@ -9,7 +9,7 @@ import { clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync }
 import { getCurrentUser } from '../store/user';
 import { requestBooks } from "../store/books.js";
 import { FontAwesome } from '@expo/vector-icons';
-import SettingsList from 'react-native-settings-list';
+//import SettingsList from 'react-native-settings-list';
 import { getI18nText, getI18nBibleBook } from '../store/I18n';
 import { clearLesson } from '../store/lessons.js'
 import { clearPassage } from '../store/passage.js'
@@ -319,7 +319,7 @@ import { LegacyAsyncStorage } from 'expo';
             }
           }}>
 
-          <SettingsList borderColor='#c8c7cc' defaultItemSize={40}>
+          {/*<SettingsList borderColor='#c8c7cc' defaultItemSize={40}>
             <SettingsList.Header headerText={getI18nText('设置')} headerStyle={{ color: 'black' }} />
             <SettingsList.Item
               title={getI18nText('显示语言')}
@@ -340,57 +340,72 @@ import { LegacyAsyncStorage } from 'expo';
               switchState={this.state.offlineMode}
               switchOnValueChange={this.onSwitchOffline.bind(this)}
             />
-            {/*<SettingsList.Item
+            <SettingsList.Item
             title='字体大小'
             titleInfo='中等'
             titleInfoStyle={styles.titleInfoStyle}
             onPress={this.onFontSize.bind(this)}
-          />*/}
+          />
             <SettingsList.Header headerText={getI18nText('反馈意见')} headerStyle={{ color: 'black', marginTop: 15 }} />
-            {/*<SettingsList.Header headerText='MBSF - Mobile Bible Study Fellowship' headerStyle={{ color: 'black', marginTop: 15 }} />*/}
-            <View style={styles.answerContainer}>
-              <TextInput
-                style={styles.answerInput}
-                ref={(input) => this.feedbackInput = input}
-                blurOnSubmit={false}
-                placeholder={getI18nText('反馈意见')}
-                multiline
-                onChangeText={(text) => { this.feedback = text }}
-              />
-            </View>
-            <View style={{ alignItems: 'center' }}>
-              <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
-            </View>
-            <SettingsList.Item
-              title={getI18nText('版本') + ': ' + manifest.version}
-              titleInfo={getI18nText('检查更新')}
-              titleInfoStyle={styles.titleInfoStyle}
-              onPress={this.checkForUpdate.bind(this)}
+            <SettingsList.Header headerText='MBSF - Mobile Bible Study Fellowship' headerStyle={{ color: 'black', marginTop: 15 }} />
+          <View style={styles.answerContainer}>
+            <TextInput
+              style={styles.answerInput}
+              ref={(input) => this.feedbackInput = input}
+              blurOnSubmit={false}
+              placeholder={getI18nText('反馈意见')}
+              multiline
+              onChangeText={(text) => { this.feedback = text }}
             />
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
+          </View>
+          <SettingsList.Item
+            title={getI18nText('版本') + ': ' + manifest.version}
+            titleInfo={getI18nText('检查更新')}
+            titleInfoStyle={styles.titleInfoStyle}
+            onPress={this.checkForUpdate.bind(this)}
+          />
           </SettingsList>
+        */}
           {
             Platform.OS == 'ios' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>11/13 Notice: If you updated app recently, you'll not see your answers (it's not lost), we're working with Expo team with a fix, ETA 11/25.</Text>
-              {/*<View style={{ alignItems: 'center' }}>
-                <RkButton onPress={this.migrate.bind(this)}>Try fix1</RkButton>
-                <View style={{ height: this.state.height, width: Dimensions.get('window').width, marginBottom: 200 }}>
-                  <TextInput
-                    style={{ borderWidth: 1 }}
-                    ref='answer'
-                    editable={false}
-                    blurOnSubmit={false}
-                    multiline
-                    value={this.state.log}
-                    onChange={(e) => this.onContentSizeChange(e)}
-                    onContentSizeChange={(e) => this.onContentSizeChange(e)}
-                  />
-                </View>
-              </View>*/}
+              <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={() => {
+                  Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1299549049?mt=8').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
+              </View>
             </View>
           }
+          {
+            Platform.OS == 'android' &&
+            <View>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to Google Play Store to update.</Text>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={() => {
+                  Linking.openURL('market://details?id=org.cbsfappv1.bsfclass').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
+              </View>
+            </View>
+          }
+          <View style={styles.answerContainer}>
+            <TextInput
+              style={styles.answerInput}
+              ref={(input) => this.feedbackInput = input}
+              blurOnSubmit={false}
+              placeholder={getI18nText('反馈意见')}
+              multiline
+              onChangeText={(text) => { this.feedback = text }}
+            />
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
+          </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingView >
     );
   }
 }
