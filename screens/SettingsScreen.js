@@ -2,21 +2,20 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Layout from '../constants/Layout';
-import { ScrollView, StyleSheet, Image, Text, View, Alert, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard, UIManager, AsyncStorage, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Image, Text, View, Alert, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Linking, Keyboard, UIManager, AsyncStorage, Dimensions } from 'react-native';
 import Expo, { Constants } from 'expo';
 import { Models } from '../dataStorage/models';
 import { clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync } from '../dataStorage/storage';
 import { getCurrentUser } from '../store/user';
 import { requestBooks } from "../store/books.js";
 import { FontAwesome } from '@expo/vector-icons';
-import SettingsList from 'react-native-settings-list';
+//import SettingsList from 'react-native-settings-list';
 import { getI18nText, getI18nBibleBook } from '../store/I18n';
 import { clearLesson } from '../store/lessons.js'
 import { clearPassage } from '../store/passage.js'
 import { RkButton } from 'react-native-ui-kitten';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
 import { LegacyAsyncStorage } from 'expo';
-
 @connectActionSheet class SettingsScreen extends React.Component {
   static route = {
     navigationBar: {
@@ -290,62 +289,75 @@ import { LegacyAsyncStorage } from 'expo';
               });
             }
           }}>
-
-          <SettingsList borderColor='#c8c7cc' defaultItemSize={40}>
-            <SettingsList.Header headerText={getI18nText('设置')} headerStyle={{ color: 'black' }} />
-            <SettingsList.Item
-              title={getI18nText('显示语言')}
-              titleInfo={this.state.language}
-              titleInfoStyle={styles.titleInfoStyle}
-              onPress={this.onLanguage.bind(this)}
-            />
-            <SettingsList.Item
-              title={getI18nText('圣经版本')}
-              titleInfo={this.state.bibleVersion}
-              titleInfoStyle={styles.titleInfoStyle}
-              onPress={this.onBibleVerse.bind(this)}
-            />
-            <SettingsList.Item
-              title={getI18nText('离线模式')}
-              hasNavArrow={false}
-              hasSwitch={true}
-              switchState={this.state.offlineMode}
-              switchOnValueChange={this.onSwitchOffline.bind(this)}
-            />
-            {/*<SettingsList.Item
-            title='字体大小'
-            titleInfo='中等'
-            titleInfoStyle={styles.titleInfoStyle}
-            onPress={this.onFontSize.bind(this)}
-          />*/}
-            <SettingsList.Header headerText={getI18nText('反馈意见')} headerStyle={{ color: 'black', marginTop: 15 }} />
-            {/*<SettingsList.Header headerText='MBSF - Mobile Bible Study Fellowship' headerStyle={{ color: 'black', marginTop: 15 }} />*/}
-            <View style={styles.answerContainer}>
-              <TextInput
-                style={styles.answerInput}
-                ref={(input) => this.feedbackInput = input}
-                blurOnSubmit={false}
-                placeholder={getI18nText('反馈意见')}
-                multiline
-                onChangeText={(text) => { this.feedback = text }}
+          {/*
+            <SettingsList borderColor='#c8c7cc' defaultItemSize={40}>
+              <SettingsList.Header headerText={getI18nText('设置')} headerStyle={{ color: 'black' }} />
+              <SettingsList.Item
+                title={getI18nText('显示语言')}
+                titleInfo={this.state.language}
+                titleInfoStyle={styles.titleInfoStyle}
+                onPress={this.onLanguage.bind(this)}
               />
-            </View>
-            <View style={{ alignItems: 'center' }}>
-              <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
-            </View>
-            <SettingsList.Item
-              title={getI18nText('版本') + ': ' + manifest.version}
-              titleInfo={getI18nText('检查更新')}
+              <SettingsList.Item
+                title={getI18nText('圣经版本')}
+                titleInfo={this.state.bibleVersion}
+                titleInfoStyle={styles.titleInfoStyle}
+                onPress={this.onBibleVerse.bind(this)}
+              />
+              <SettingsList.Item
+                title={getI18nText('离线模式')}
+                hasNavArrow={false}
+                hasSwitch={true}
+                switchState={this.state.offlineMode}
+                switchOnValueChange={this.onSwitchOffline.bind(this)}
+              />
+              <SettingsList.Item
+              title='字体大小'
+              titleInfo='中等'
               titleInfoStyle={styles.titleInfoStyle}
-              onPress={this.checkForUpdate.bind(this)}
+              onPress={this.onFontSize.bind(this)}
             />
-          </SettingsList>
+              <SettingsList.Header headerText={getI18nText('反馈意见')} headerStyle={{ color: 'black', marginTop: 15 }} />
+              <SettingsList.Header headerText='MBSF - Mobile Bible Study Fellowship' headerStyle={{ color: 'black', marginTop: 15 }} />
+              <View style={styles.answerContainer}>
+                <TextInput
+                  style={styles.answerInput}
+                  ref={(input) => this.feedbackInput = input}
+                  blurOnSubmit={false}
+                  placeholder={getI18nText('反馈意见')}
+                  multiline
+                  onChangeText={(text) => { this.feedback = text }}
+                />
+              </View>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
+              </View>
+              <SettingsList.Item
+                title={getI18nText('版本') + ': ' + manifest.version}
+                titleInfo={getI18nText('检查更新')}
+                titleInfoStyle={styles.titleInfoStyle}
+                onPress={this.checkForUpdate.bind(this)}
+              />
+  </SettingsList>*/}
           {
             Platform.OS == 'ios' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>11/13 Notice: If you updated app recently, you'll not see your answers, please click to recover.</Text>
+              <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
               <View style={{ alignItems: 'center' }}>
-                <RkButton onPress={this.migrate.bind(this)}>Recover</RkButton>
+                <RkButton onPress={() => {
+                  Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1299549049?mt=8').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
+              </View>
+            </View>
+          }
+          {
+            Platform.OS == 'android' &&
+            <View>
+              <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to Google Play Store to update.</Text>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={() => {
+                  Linking.openURL('market://details?id=org.cbsfappv1.bsfclass').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
               </View>
             </View>
           }
