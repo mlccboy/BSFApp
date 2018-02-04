@@ -339,6 +339,19 @@ import { LegacyAsyncStorage } from 'expo';
                 onPress={this.checkForUpdate.bind(this)}
               />
   </SettingsList>*/}
+          <View style={styles.answerContainer}>
+            <TextInput
+              style={styles.answerInput}
+              ref={(input) => this.feedbackInput = input}
+              blurOnSubmit={false}
+              placeholder={getI18nText('反馈意见')}
+              multiline
+              onChangeText={(text) => { this.feedback = text }}
+            />
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <RkButton onPress={this.onSubmitFeedback.bind(this)}>{getI18nText('提交')}</RkButton>
+          </View>
           {
             Platform.OS == 'ios' &&
             <View>
@@ -353,7 +366,7 @@ import { LegacyAsyncStorage } from 'expo';
           {
             Platform.OS == 'android' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to Google Play Store to update.</Text>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to Google Play Store to update.</Text>
               <View style={{ alignItems: 'center' }}>
                 <RkButton onPress={() => {
                   Linking.openURL('market://details?id=org.cbsfappv1.bsfclass').catch(err => log('An error occurred', err));
