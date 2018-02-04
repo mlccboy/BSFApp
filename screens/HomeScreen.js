@@ -9,13 +9,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform,
+  Platform
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { MonoText } from '../components/StyledText';
 import Colors from '../constants/Colors'
 import { requestBooks } from "../store/books.js";
 import { getI18nText, getI18nBibleBook } from '../store/I18n';
+import { RkButton } from 'react-native-ui-kitten';
 
 class HomeScreen extends React.Component {
   static route = {
@@ -56,6 +57,28 @@ class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
+          {
+            Platform.OS == 'ios' &&
+            <View>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={() => {
+                  Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1299549049?mt=8').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
+              </View>
+            </View>
+          }
+          {
+            Platform.OS == 'android' &&
+            <View>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to Google Play Store to update.</Text>
+              <View style={{ alignItems: 'center' }}>
+                <RkButton onPress={() => {
+                  Linking.openURL('market://details?id=org.cbsfappv1.bsfclass').catch(err => log('An error occurred', err));
+                }}>Go to Store</RkButton>
+              </View>
+            </View>
+          }
           <View style={styles.booksContainer}>
             {mainUI}
           </View>
