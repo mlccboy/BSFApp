@@ -375,7 +375,7 @@ import { LegacyAsyncStorage } from 'expo';
               <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
               <View style={{ alignItems: 'center' }}>
                 <RkButton onPress={() => {
-                  Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1299549049?mt=8').catch(err => log('An error occurred', err));
+                  Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1229869018?mt=8').catch(err => log('An error occurred', err));
                 }}>Go to Store</RkButton>
               </View>
             </View>
