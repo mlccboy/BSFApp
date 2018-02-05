@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Layout from '../constants/Layout';
-import { ScrollView, StyleSheet, Image, Text, View, Alert, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard, UIManager, AsyncStorage, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Image, Text, View, Alert, TextInput, TouchableOpacity, KeyboardAvoidingView, Linking, Platform, Keyboard, UIManager, AsyncStorage, Dimensions } from 'react-native';
 import Expo, { Constants } from 'expo';
 import { Models } from '../dataStorage/models';
 import { clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync } from '../dataStorage/storage';
@@ -372,7 +372,7 @@ import { LegacyAsyncStorage } from 'expo';
           {
             Platform.OS == 'ios' &&
             <View>
-              <Text style={{ color: 'red', fontSize: 32, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
+              <Text style={{ color: 'red', fontSize: 16, fontWeight: 'normal', margin: 10 }}>Notice: Old version are no longer supported, please go to App Store to update.</Text>
               <View style={{ alignItems: 'center' }}>
                 <RkButton onPress={() => {
                   Linking.openURL('itms://itunes.apple.com/us/app/apple-store/id1229869018?mt=8').catch(err => log('An error occurred', err));
