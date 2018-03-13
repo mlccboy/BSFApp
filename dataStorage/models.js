@@ -57,6 +57,17 @@ export const Models = {
     api: "/recover",
     restUri: HostServer + "/recover",
   },
+  GetAnswer: {
+    key: "GET_ANSWER",
+    api: "/get_answer",
+    restUri: "http://192.168.1.147:3000/get_answer",
+  },
+  UploadAnswer: {
+    key: "UPLOAD_ANSWER",
+    api: "/save_answer",
+    restUri: "http://192.168.1.147:3000/save_answer",
+  },
+
   DefaultLanguage: "chs",
   ValidLanguages: ["chs", "cht", "eng", "spa"],
   Languages: [
