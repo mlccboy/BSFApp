@@ -5,6 +5,10 @@
     "slug": "CBSFApp",
     "privacy": "public",
     "sdkVersion": "26.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "2018.03.30.0",
     "primaryColor": "#cccccc",
     "icon": "./assets/images/icon.png",
@@ -13,6 +17,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_ERROR_RECOVERY",
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "icon": "./assets/images/icon-ios.png",
       "buildNumber": "1",

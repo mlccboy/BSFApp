@@ -53,6 +53,11 @@ async function reloadGlobalCache(name) {
     }
 }
 
+function deleteGlobalCache(name) {
+    console.log("clearGlobalCache: " + name);
+    delete global_cache[name];
+}
+
 async function getCacheData(name, key) {
     if (!global_cache[name]) {
         await reloadGlobalCache(name);
@@ -406,4 +411,4 @@ async function showWebServiceCallErrorsAsync(result, acceptStatus, showUI = true
     return true;
 }
 
-export { loadAsync, saveAsync, clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync, pokeServer, reloadGlobalCache, loadFromCacheAsync };
+export { loadAsync, saveAsync, clearStorageAsync, callWebServiceAsync, showWebServiceCallErrorsAsync, pokeServer, reloadGlobalCache, deleteGlobalCache, loadFromCacheAsync };
