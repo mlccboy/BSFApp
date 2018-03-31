@@ -7,7 +7,7 @@ import { getI18nText } from '../store/I18n';
 let currentUser;
 
 Expo.Updates.addListener((type, manifest, message) => {
-  console.log("[Update]:" + type);
+  console.log("[Update]:" + JSON.stringify({ type, manifest, message }));
   if (type == Expo.Updates.EventType.DOWNLOAD_FINISHED) {
     Alert.alert(getI18nText('发现更新') + ': ' + result.body.version, getI18nText('程序将重新启动'), [
       { text: 'OK', onPress: () => Expo.Updates.reload() }

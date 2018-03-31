@@ -41,7 +41,7 @@ export default class App extends React.Component {
     await getCurrentUser().loadExistingUserAsync();
     // TODO: [Wei] Workaround for now
     if (!getCurrentUser().isLoggedOn()) {
-      let locale = await Expo.Util.getCurrentLocaleAsync();
+      let locale = await Expo.Localization.getCurrentLocaleAsync();
       console.log(locale);
       let lang = 'chs';
       let bible = 'rcuvss';

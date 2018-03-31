@@ -29,8 +29,7 @@
       "icon": "./assets/images/icon-ios.png",
       "buildNumber": "1",
       "bundleIdentifier": "org.CBSF.bsfclass",
-      "supportsTablet": true,
-      "loadJSInBackgroundExperimental": true
+      "supportsTablet": true
     },
     "android": {
       "icon": "./assets/images/icon-android.png",

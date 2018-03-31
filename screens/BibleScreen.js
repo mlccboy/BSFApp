@@ -12,12 +12,10 @@ import { pokeServer } from '../dataStorage/storage';
 import { Models } from '../dataStorage/models';
 import { Octicons } from '@expo/vector-icons';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
-import { clearPassage } from '../store/passage.js'
+import { clearPassage } from '../store/passage';
 import { getCurrentUser } from '../store/user';
 
 const bookid = require('../assets/json/bookid.json');
-
-function onBibleVerse() { }
 
 @connectActionSheet class BibleScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -116,7 +114,7 @@ function onBibleVerse() { }
     } else {
       // Display loading screen
       return (
-        <View style={styles.BSFQuestionContainer}>
+        <View style={{ flex: 1 }}>
           <Text style={{ marginVertical: 12, color: 'black' }}>Loading</Text>
         </View>
       );
@@ -154,5 +152,3 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(BibleScreen)
 
-const styles = StyleSheet.create({
-});
