@@ -9,11 +9,15 @@ let currentUser;
 Expo.Updates.addListener((type, manifest, message) => {
   console.log("[Update]:" + JSON.stringify({ type, manifest, message }));
   if (type == Expo.Updates.EventType.DOWNLOAD_FINISHED) {
-    Alert.alert(getI18nText('发现更新') + ': ' + result.body.version, getI18nText('程序将重新启动'), [
-      { text: 'OK', onPress: () => Expo.Updates.reload() }
-    ]);
+    askForUpdate();
   }
 });
+
+function askForUpdate() {
+  Alert.alert(getI18nText('发现更新'), getI18nText('程序将重新启动'), [
+    { text: 'OK', onPress: () => Expo.Updates.reload() }
+  ]);
+}
 
 function getCurrentUser() {
   if (!currentUser) {
@@ -299,14 +303,16 @@ export default class User {
       const update = await Expo.Updates.checkForUpdateAsync();
       if (update.isAvailable) {
         await Expo.Updates.fetchUpdateAsync();
+        askForUpdate();
       } else {
+        const { manifest } = Constants;
         Alert.alert(getI18nText('您已经在使用最新版本'), getI18nText('版本') + ': ' + manifest.version + ' (SDK' + manifest.sdkVersion + ')', [
           { text: 'OK', onPress: () => { } },
           { text: 'Reload', onPress: () => { Expo.Updates.reload() } },
         ]);
       }
     } catch (e) {
-      console.warn(e);
+      Alert.alert('Error', JSON.stringify(e));
     }
   }
 
