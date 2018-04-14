@@ -312,7 +312,10 @@ export default class User {
         ]);
       }
     } catch (e) {
-      Alert.alert('Error', JSON.stringify(e));
+      console.log(JSON.stringify(e));
+      if (!onlyShowUpdateUI) {
+        Alert.alert('Error', JSON.stringify(e));
+      }
     }
   }
 
